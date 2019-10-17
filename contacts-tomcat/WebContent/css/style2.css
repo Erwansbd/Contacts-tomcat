@@ -1,0 +1,28 @@
+label
+{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100px;
+}
+div{
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 10px;
+}
+body{
+	display: flex;
+	justify-content: center;
+}
+button {
+	display: flex;
+	justify-content: center;
+}
+.contenair{
+	
+	background-color: #9B1B30;
+	padding: 10px;
+	border: 1px black solid;
+	border-radius: 10px;
+}
+
