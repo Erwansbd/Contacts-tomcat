@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.gtm.contacts.entities.Adresse;
 import fr.gtm.contacts.entities.Contact;
 import fr.gtm.contacts.services.ContactService;
 
 /**
- * Servlet implementation class ModifierContactServlet
+ * Servlet implementation class ModifierAdresseServlet
  */
-@WebServlet("/ModifierContactServlet")
-public class ModifierContactServlet extends HttpServlet {
+@WebServlet("/ModifierAdresseServlet")
+public class ModifierAdresseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,17 +28,18 @@ public class ModifierContactServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ContactService service = (ContactService) getServletContext().getAttribute(Constantes.CONTACT_SERVICE);
 
-		String page = "";
+		
 		String idtemp = request.getParameter("id");
 		Long id = Long.parseLong(idtemp);
+		String page = "";
 
 		if (id == null || id < 0) {
 			page = "/ContactServlet";
 		} else {
-			Contact contact = service.getContactById(id);
-			request.setAttribute("contact", contact);
+			Adresse adresse = service.getAdresseById(id);
+			request.setAttribute("adresse", adresse);
 
-			page = "/modifier-contacts.jsp";
+			page = "/modifier-adresse.jsp";
 
 		}
 

@@ -38,6 +38,13 @@ public class ContactDAO {
 		return contact;
 	}
 	
+	public Adresse getAdresseById(long id) {
+		EntityManager em = emf.createEntityManager();
+		Adresse adresse = em.find(Adresse.class, id);
+		em.close();
+		return adresse;
+	}
+	
 	public void delete(Contact contact) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -96,4 +103,5 @@ public class ContactDAO {
 		em.close();
 		return adresses;
 	}
+	
 }

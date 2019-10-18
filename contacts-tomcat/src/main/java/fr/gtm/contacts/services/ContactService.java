@@ -31,6 +31,10 @@ public class ContactService {
 		return dao.getContactById(id);
 	}
 	
+	public Adresse getAdresseById(long id) {
+		return dao.getAdresseById(id);
+	}
+	
 	public void create(Contact contact) {
 		dao.create(contact);
 	}
