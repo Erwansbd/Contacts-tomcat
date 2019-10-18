@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
+import fr.gtm.contacts.entities.Adresse;
 import fr.gtm.contacts.entities.Contact;
 import fr.gtm.contacts.services.ContactService;
 
@@ -34,8 +33,10 @@ public class ContactServlet extends HttpServlet {
 		String page = "";
 		
 		List<Contact> contacts = service.getContacts();
+		//List<Adresse> adresses = service.getAdresses();
 		
 		request.setAttribute("contacts", contacts);
+		//request.setAttribute("adresses", adresses);
 		
 		page = "/show-contacts.jsp";
 		

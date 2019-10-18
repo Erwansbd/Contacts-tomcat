@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 
 
 import fr.gtm.contacts.dao.ContactDAO;
+import fr.gtm.contacts.entities.Adresse;
 import fr.gtm.contacts.entities.Contact;
 
 public class ContactService {
@@ -36,6 +37,9 @@ public class ContactService {
 	
 	public void update(Contact contact) {
 		dao.update(contact);
+	}
+	public List<Adresse> getAdresses() {
+		return dao.getAdresses();
 	}
 
 }

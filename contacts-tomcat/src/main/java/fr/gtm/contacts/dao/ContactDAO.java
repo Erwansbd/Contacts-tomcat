@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import fr.gtm.contacts.entities.Adresse;
 import fr.gtm.contacts.entities.Civilite;
 import fr.gtm.contacts.entities.Contact;
 
@@ -87,5 +88,12 @@ public class ContactDAO {
 				List<Contact> contacts = em.createNamedQuery("Contact.getContacts", Contact.class).getResultList();
 		em.close();
 		return contacts;
+	}
+	
+	public List<Adresse> getAdresses() {
+		EntityManager em = emf.createEntityManager();
+		List<Adresse> adresses = em.createNamedQuery("Contact.getAdresse", Adresse.class).getResultList();
+		em.close();
+		return adresses;
 	}
 }
