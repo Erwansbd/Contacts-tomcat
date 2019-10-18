@@ -34,5 +34,8 @@ public class ContactService {
 		dao.create(contact);
 	}
 	
+	public void update(Contact contact) {
+		dao.update(contact);
+	}
 
 }

@@ -14,30 +14,34 @@ import fr.gtm.contacts.entities.Contact;
 import fr.gtm.contacts.services.ContactService;
 
 /**
- * Servlet implementation class AjouterContactServlet
+ * Servlet implementation class ModifierContactServlet2
  */
-@WebServlet("/AjouterContactServlet")
-public class AjouterContactServlet extends HttpServlet {
+@WebServlet("/ModifierContactServlet2")
+public class ModifierContactServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ContactService service = (ContactService) getServletContext().getAttribute(Constantes.CONTACT_SERVICE);
 		String page ="";
+		String idtemp = request.getParameter("id");
+		Long id = Long.parseLong(idtemp);
 		String civilite = request.getParameter("civilite");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 
 		
 		if(civilite==null || civilite.isEmpty() || nom==null || nom.isEmpty() || prenom==null || prenom.isEmpty()) {
-			page = "/index.jsp";
+			page = "/modifier-contacts.jsp";
 		} else {
-			Contact contact = new Contact();
+			Contact contact = service.getContactById(id);
 			contact.setCivilite(Civilite.valueOf(civilite));
 			contact.setNom(nom);
 			contact.setPrenom(prenom);
-			service.create(contact);
+			service.update(contact);
 			page = "/ContactServlet";
 		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(page);

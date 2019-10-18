@@ -9,38 +9,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.gtm.contacts.entities.Civilite;
 import fr.gtm.contacts.entities.Contact;
 import fr.gtm.contacts.services.ContactService;
 
 /**
- * Servlet implementation class AjouterContactServlet
+ * Servlet implementation class ModifierContactServlet
  */
-@WebServlet("/AjouterContactServlet")
-public class AjouterContactServlet extends HttpServlet {
+@WebServlet("/ModifierContactServlet")
+public class ModifierContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		ContactService service = (ContactService) getServletContext().getAttribute(Constantes.CONTACT_SERVICE);
+		
 		String page ="";
-		String civilite = request.getParameter("civilite");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
+		String idtemp = request.getParameter("id");
+		Long id = Long.parseLong(idtemp);
 
 		
-		if(civilite==null || civilite.isEmpty() || nom==null || nom.isEmpty() || prenom==null || prenom.isEmpty()) {
-			page = "/index.jsp";
-		} else {
-			Contact contact = new Contact();
-			contact.setCivilite(Civilite.valueOf(civilite));
-			contact.setNom(nom);
-			contact.setPrenom(prenom);
-			service.create(contact);
+		if(id==null || id < 0) {
 			page = "/ContactServlet";
 		}
+		else
+		{
+			Contact contact = service.getContactById(id);
+			request.setAttribute("contact", contact);
+
+
+			page = "/modifier-contacts.jsp";
+			
+		}
+		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(page);
+		
 		rd.forward(request, response);
 	}
 
